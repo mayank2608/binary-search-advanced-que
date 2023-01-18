@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+void recursion(vector<int>& arr, int n,int count){
+    if(n==count){
+        return;
+    }
+    int mini=count;
+        for(int j=count+1;j<n;j++){
+            if(arr[mini]>arr[j])
+            mini=j;
+        }
+
+        swap(arr[mini],arr[count]);
+    recursion(arr,n,++count);
+}
+void selectionSort(vector<int>& arr, int n)
+{   
+    // Write your code here.
+       int count=0;
+      recursion(arr,n,count);  
+    
+}
