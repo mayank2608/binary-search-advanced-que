@@ -1,0 +1,33 @@
+bool is_possible(int mid,vector<int> &stalls, int k){
+int cowcount=1;
+    int last_position =0;
+    for(int i=0;i<stalls.size();i++){
+
+    if((stalls[i]-stalls[last_position])>=mid){
+   cowcount++;
+        last_position=i;
+        if(cowcount==k)
+            return true;
+    }
+        }
+    return false;
+}
+int aggressiveCows(vector<int> &stalls, int k)
+{
+    //    Write your code here.
+    sort(stalls.begin(),stalls.end());
+  
+        int start=0,mid,ans;
+    int end=stalls[stalls.size()-1]-stalls[0];
+    
+    while(start<=end){
+    mid=start+(end-start)/2;
+//        
+        if(is_possible(mid,stalls,k)){
+        ans=mid;
+            start=mid+1;
+        }
+        else
+            end=mid-1;
+    }
+    return ans;
