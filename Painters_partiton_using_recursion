@@ -1,0 +1,39 @@
+bool is_possible(int mid,vector<int> &boards, int k){
+int painters_count=1;
+long long int board_sum=0;
+    for(int i=0;i<boards.size();i++){
+    if(board_sum+boards[i]<=mid){
+    board_sum+=boards[i];
+    }
+        else{
+        painters_count++;
+            if(painters_count>k || mid<boards[i]){
+            return false;
+            }
+            board_sum=boards[i];
+        }
+    }
+    return true;
+}
+int binary_search(long long int start,long long int end,vector<int> &boards, int k,long long int ans){
+    if(start>end)
+        return ans;
+int mid=start+(end-start)/2;
+        if(is_possible(mid,boards,k)){
+            ans=mid;
+            return binary_search(start,mid-1,boards,k,ans);
+        }
+        else
+           return binary_search(mid+1,end,boards,k,ans);
+    
+}
+int findLargestMinDistance(vector<int> &boards, int k)
+{
+    //    Write your code here.
+    long long int start=0,end=0,ans,mid;
+    for(int i=0;i<boards.size();i++){
+    end+=boards[i];
+    }
+    return binary_search(start,end,boards,k,ans);
+   
+}
